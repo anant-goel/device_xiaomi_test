@@ -12,7 +12,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, device/xiaomi/veux/device.mk)
 
 # Inherit some common xdroid stuff.
-$(call inherit-product, vendor/xdroid/config/common_full_phone.mk)
+$(call inherit-product, vendor/xdroid/config/common.mk)
 $(call inherit-product, vendor/gms/gms_full.mk)
 TARGET_USES_AOSP_RECOVERY := true
 XDROID_BOOT := 1080
