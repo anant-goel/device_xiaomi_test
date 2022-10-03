@@ -5,9 +5,9 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/evolution_veux.mk
+    $(LOCAL_DIR)/corvus_veux.mk
 
 COMMON_LUNCH_CHOICES := \
-    evolution_veux-user \
-    evolution_veux-userdebug \
-    evolution_veux-eng
+    corvus_veux-user \
+    corvus_veux-userdebug \
+    corvus_veux-eng
