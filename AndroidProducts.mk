@@ -5,9 +5,9 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/evolution_veux.mk
+    $(LOCAL_DIR)/xdroid_veux.mk
 
 COMMON_LUNCH_CHOICES := \
-    evolution_veux-user \
-    evolution_veux-userdebug \
-    evolution_veux-eng
+    xdroid_veux-user \
+    xdroid_veux-userdebug \
+    xdroid_veux-eng
