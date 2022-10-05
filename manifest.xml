@@ -25,6 +25,47 @@
         </interface>
         <fqname>@6.0::IEffectsFactory/default</fqname>
     </hal>
+
+
+<!--	    
+    <hal format="hidl" override="true">
+        <name>android.hardware.graphics.composer</name>
+        <transport>hwbinder</transport>
+        <version>2.1-4</version>
+        <interface>
+            <name>IComposer</name>
+            <instance>default</instance>
+        </interface>
+    </hal>	     
+
+
+   <hal format="hidl">
+        <name>android.hardware.graphics.allocator</name>
+	<transport>hwbinder</transport>
+	<version>4.0</version>
+        <interface>
+            <name>IAllocator</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>@4.0::IAllocator/default</fqname>
+    </hal>
+-->
+     <hal format="hidl">
+        <name>android.hardware.graphics.mapper</name> 
+        <transport>hwbinder</transport>
+        <version>2.1</version>
+        <interface>
+            <name>IMapper</name> 
+            <instance>default</instance>
+        </interface>   
+        <fqname>@2.1::IMapper/default</fqname>
+    </hal>
+
+    <hal format="aidl">
+        <name>android.hardware.power</name>
+        <fqname>IPower/default</fqname>
+    </hal>
+
     <hal format="hidl">
         <name>android.hardware.bluetooth</name>
         <transport>hwbinder</transport>
@@ -382,26 +423,6 @@
             <instance>default</instance>
         </interface>
         <fqname>@1.0::IFstManager/default</fqname>
-    </hal>
-    <hal format="hidl">
-        <name>vendor.qti.hardware.iop</name>
-        <transport>hwbinder</transport>
-        <version>2.0</version>
-        <interface>
-            <name>IIop</name>
-            <instance>default</instance>
-        </interface>
-        <fqname>@2.0::IIop/default</fqname>
-    </hal>
-    <hal format="hidl">
-        <name>vendor.qti.hardware.perf</name>
-        <transport>hwbinder</transport>
-        <version>2.2</version>
-        <interface>
-            <name>IPerf</name>
-            <instance>default</instance>
-        </interface>
-        <fqname>@2.2::IPerf/default</fqname>
     </hal>
     <hal format="hidl">
         <name>vendor.qti.hardware.qccvndhal</name>

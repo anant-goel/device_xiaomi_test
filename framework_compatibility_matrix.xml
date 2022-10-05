@@ -29,6 +29,56 @@
             <instance>default</instance>
         </interface>
     </hal>
+
+ <hal format="hidl" optional="true">
+        <name>android.hardware.drm</name>
+        <version>1.4</version>
+        <interface>
+            <name>ICryptoFactory</name>
+            <instance>clearkey</instance>
+        </interface>
+        <interface>
+            <name>IDrmFactory</name>
+            <instance>clearkey</instance>
+        </interface>
+    </hal>
+
+<hal format="hidl" optional="true">
+        <name>android.hardware.power</name>
+        <version>1.0-2</version>
+        <interface>
+            <name>IPower</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+
+<hal format="hidl" override="true">
+        <name>android.hardware.graphics.allocator</name>
+        <version>4.0</version>
+        <interface>
+            <name>IAllocator</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+
+<hal format="hidl" override="true">
+        <name>android.hardware.graphics.composer</name>
+        <version>2.1-4</version>
+        <interface>
+            <name>IComposer</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+
+    <hal format="hidl" override="true">
+        <name>android.hardware.graphics.mapper</name>
+        <transport>hwbinder</transport>
+        <version>4.0</version>
+        <interface>
+            <name>IMapper</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
     <hal format="hidl" optional="true">
         <name>android.hardware.gnss</name>
         <version>1.0-1</version>
@@ -518,14 +568,6 @@
         </interface>
     </hal>
     <hal format="hidl" optional="true">
-        <name>vendor.qti.hardware.iop</name>
-        <version>2.0</version>
-        <interface>
-            <name>IIop</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl" optional="true">
         <name>vendor.qti.hardware.limits</name>
         <version>1.0</version>
         <interface>
@@ -546,14 +588,6 @@
         <version>1.0</version>
         <interface>
             <name>IPAL</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl" optional="true">
-        <name>vendor.qti.hardware.perf</name>
-        <version>2.0-2</version>
-        <interface>
-            <name>IPerf</name>
             <instance>default</instance>
         </interface>
     </hal>
