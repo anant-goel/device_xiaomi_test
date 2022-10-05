@@ -25,9 +25,7 @@
         </interface>
         <fqname>@6.0::IEffectsFactory/default</fqname>
     </hal>
-
-
-<!--	    
+  
     <hal format="hidl" override="true">
         <name>android.hardware.graphics.composer</name>
         <transport>hwbinder</transport>
@@ -49,7 +47,6 @@
         </interface>
         <fqname>@4.0::IAllocator/default</fqname>
     </hal>
--->
      <hal format="hidl">
         <name>android.hardware.graphics.mapper</name> 
         <transport>hwbinder</transport>
