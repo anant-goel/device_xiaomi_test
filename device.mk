@@ -53,6 +53,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.zram.first_wb_delay_mins=1440 \
     ro.zram.periodic_wb_delay_hours=24
 
+# Device-specific settings
+PRODUCT_PACKAGES += \
+    XiaomiParts
+
+
 PRODUCT_PACKAGES += \
     android.hardware.audio.effect@6.0-impl \
     android.hardware.audio.service \
