@@ -40,6 +40,21 @@ PRODUCT_PACKAGES += \
     libqcomvoiceprocessing \
     libqcompostprocbundle
 
+# Fstab
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/rootdir/etc/fstab.zram:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.zram
+
+
+# ZRAM writeback
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.zram.mark_idle_delay_mins=60 \
+    ro.zram.first_wb_delay_mins=1440 \
+    ro.zram.periodic_wb_delay_hours=24
+
+# Device-specific settings
+PRODUCT_PACKAGES += \
+    XiaomiParts
+
 PRODUCT_PACKAGES += \
     android.hardware.audio.effect@6.0-impl \
     android.hardware.audio.service \
