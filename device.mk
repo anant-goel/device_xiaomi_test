@@ -29,6 +29,8 @@ AB_OTA_POSTINSTALL_CONFIG += \
     FILESYSTEM_TYPE_vendor=ext4 \
     POSTINSTALL_OPTIONAL_vendor=true
 
+DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
+
 PRODUCT_PACKAGES += \
     checkpoint_gc \
     otapreopt_script
@@ -50,14 +52,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.zram.mark_idle_delay_mins=60 \
     ro.zram.first_wb_delay_mins=1440 \
     ro.zram.periodic_wb_delay_hours=24
-
-# Device-specific settings
-PRODUCT_PACKAGES += \
-    XiaomiParts
-
-# Call recording
-PRODUCT_PACKAGES += \
-    com.google.android.apps.dialer.call_recording_audio.features.xml
 
 PRODUCT_PACKAGES += \
     android.hardware.audio.effect@6.0-impl \
@@ -142,6 +136,7 @@ PRODUCT_PACKAGES += \
 # Component Overrides
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/component-overrides.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sysconfig/component-overrides.xml
+
 
 # Consumer IR
 PRODUCT_PACKAGES += \
@@ -241,6 +236,14 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.gatekeeper@1.0.vendor
 
+# Device-specific settings
+PRODUCT_PACKAGES += \
+    XiaomiParts
+
+# Call recording
+PRODUCT_PACKAGES += \
+    com.google.android.apps.dialer.call_recording_audio.features.xml
+
 # GPS
 PRODUCT_PACKAGES += \
     android.hardware.gnss@1.1.vendor \
@@ -329,8 +332,8 @@ PRODUCT_PACKAGES += \
    CarrierConfigOverlayVeux \
    DialerOverlayVeux \
    FrameworksResOverlayVeux \
-   SettingsOverlayVeux \
    SettingsProviderOverlayVeux \
+   SettingsOverlayVeux \
    SystemUIOverlayVeux \
    TelephonyOverlayVeux \
    WifiOverlayVeux
@@ -543,6 +546,14 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(LOCAL_PATH)/wifi/,$(TARGET_COPY_OUT_VENDOR)/etc/wifi)
+
+# EXTRA: MiuiCamera
+ifneq ($(wildcard vendor/miuicamera/config.mk),)
+$(call inherit-product, vendor/miuicamera/config.mk)
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/miuicam/veux.xml:$(TARGET_COPY_OUT_VENDOR)/etc/device_features/veux.xml \
+    $(LOCAL_PATH)/configs/miuicam/peux.xml:$(TARGET_COPY_OUT_VENDOR)/etc/device_features/peux.xml
+endif
 
 # Inherit the proprietary files
 include vendor/xiaomi/veux/veux-vendor.mk
