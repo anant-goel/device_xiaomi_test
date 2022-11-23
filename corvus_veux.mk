@@ -13,7 +13,6 @@ $(call inherit-product, device/xiaomi/veux/device.mk)
 
 # Inherit some common Corvus stuff.
 $(call inherit-product, vendor/corvus/config/common_full_phone.mk)
-$(call inherit-product, vendor/gapps/common/common-vendor.mk)
 TARGET_USES_AOSP_RECOVERY := true
 TARGET_BOOT_ANIMATION_RES := 1080
 TARGET_SUPPORTS_GOOGLE_RECORDER := true
