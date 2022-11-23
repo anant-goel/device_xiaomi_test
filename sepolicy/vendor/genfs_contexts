@@ -16,6 +16,9 @@ genfscon sysfs /devices/platform/soc/6000000.qcom,mss/subsys[0-9]+/restart_level
 genfscon sysfs /devices/platform/soc/5ab0000.qcom,venus/subsys[0-9]+/name		u:object_r:vendor_sysfs_ssr:s0
 genfscon sysfs /devices/platform/soc/5ab0000.qcom,venus/subsys[0-9]+/restart_level	u:object_r:vendor_sysfs_ssr_toggle:s0
 
++# Charger
+genfscon sysfs /sys/class/power_supply/battery/input_suspend    u:object_r:vendor_sysfs_battery_supply:s0
+
 # Touchpanel
 genfscon proc /tp_gesture								u:object_r:proc_touchpanel:s0
 

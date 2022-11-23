@@ -36,7 +36,7 @@
     <bool name="config_vibrateOnIconAnimation">true</bool>
 
     <!-- If not zero, limits the internal screen recorder's framerate to the set value. -->
-    <integer name="config_screenRecorderMaxFramerate">60</integer>
+    <integer name="config_screenRecorderMaxFramerate">120</integer>
 
     <!-- Type of a sensor that provides a low-power estimate of the desired display
          brightness, suitable to listen to while the device is asleep (e.g. during
