@@ -12,9 +12,6 @@
 # Bluetooth
 /vendor/bin/init\.mi\.btmac\.sh								u:object_r:vendor_qti_init_shell_exec:s0
 
-# Smart Charging
-/sys/class/power_supply/battery/input_suspend                        u:object_r:vendor_sysfs_battery_supply:s0
-
 # Camera
 /mnt/vendor/persist/camera(/.*)?							u:object_r:camera_persist_file:s0
 
@@ -36,7 +33,7 @@
 /data/vendor/goodix(/.*)?								u:object_r:vendor_fingerprint_data_file:s0
 /data/vendor/goodix/gf_data(/.*)?							u:object_r:vendor_fingerprint_data_file:s0
 /data/vendor/silead(/.*)?								u:object_r:vendor_fingerprint_data_file:s0
-/vendor/bin/hw/android\.hardware\.biometrics\.fingerprint@2.1-service\.xiaomi_holi	u:object_r:hal_fingerprint_default_exec:s0
+/vendor/bin/hw/android\.hardware\.biometrics\.fingerprint@2.3-service\.xiaomi	u:object_r:hal_fingerprint_default_exec:s0
 /vendor/bin/hw/vendor\.silead\.hardware\.fingerprintext@1\.0-service			u:object_r:hal_fingerprint_default_exec:s0
 
 # IR

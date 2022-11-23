@@ -29,8 +29,6 @@ AB_OTA_POSTINSTALL_CONFIG += \
     FILESYSTEM_TYPE_vendor=ext4 \
     POSTINSTALL_OPTIONAL_vendor=true
 
-DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
-
 PRODUCT_PACKAGES += \
     checkpoint_gc \
     otapreopt_script
@@ -41,17 +39,6 @@ PRODUCT_PACKAGES += \
     libqcomvisualizer \
     libqcomvoiceprocessing \
     libqcompostprocbundle
-
-# Fstab
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/etc/fstab.zram:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.zram
-
-
-# ZRAM writeback
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.zram.mark_idle_delay_mins=60 \
-    ro.zram.first_wb_delay_mins=1440 \
-    ro.zram.periodic_wb_delay_hours=24
 
 PRODUCT_PACKAGES += \
     android.hardware.audio.effect@6.0-impl \
@@ -119,12 +106,14 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES_DEBUG += \
     bootctl
 
+# Call recording
+PRODUCT_PACKAGES += \
+    com.google.android.apps.dialer.call_recording_audio.features.xml
+
 # Camera
 PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-impl \
     android.hardware.camera.provider@2.4-service_64 \
-    CameraGo \
-    privapp-permissions-camera-go.xml \
     libcamera2ndk_vendor \
     libstdc++.vendor \
     vendor.qti.hardware.camera.device@1.0.vendor \
@@ -137,7 +126,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/component-overrides.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sysconfig/component-overrides.xml
 
-
 # Consumer IR
 PRODUCT_PACKAGES += \
     android.hardware.ir@1.0-impl \
@@ -146,6 +134,13 @@ PRODUCT_PACKAGES += \
 # Device Uses High-Density Artwork Where Available
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
+
+# Device-specific settings
+PRODUCT_PACKAGES += \
+    XiaomiParts
+
+# Dex
+PRODUCT_DEX_PREOPT_DEFAULT_COMPILER_FILTER := verify
 
 # Display
 PRODUCT_PACKAGES += \
@@ -194,20 +189,11 @@ PRODUCT_PACKAGES += \
 
 # Fingerprint
 PRODUCT_PACKAGES += \
-    android.hardware.biometrics.fingerprint@2.1-service.xiaomi_holi \
-    vendor.goodix.hardware.biometrics.fingerprint@2.1.vendor \
-    vendor.xiaomi.hardware.fingerprintextension@1.0.vendor
-
-# FM
-PRODUCT_PACKAGES += \
-    FM2 \
-    libqcomfm_jni \
-    qcom.fmradio \
-    qcom.fmradio.xml
+    android.hardware.biometrics.fingerprint@2.3-service.xiaomi \
+    vendor.goodix.hardware.biometrics.fingerprint@2.1.vendor
 
 PRODUCT_COPY_FILES += \
-    prebuilts/vndk/v32/arm64/arch-arm-armv8-a/shared/vndk-sp/libhidlbase.so:$(TARGET_COPY_OUT_VENDOR)/lib/libhidlbase-v32.so \
-    prebuilts/vndk/v32/arm64/arch-arm64-armv8-a/shared/vndk-sp/libhidlbase.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libhidlbase-v32.so
+    prebuilts/vndk/v32/arm64/arch-arm64-armv8-a/shared/vndk-sp/libhidlbase.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libhidlbase-v32.so    
 
 # GPS
 PRODUCT_PACKAGES += \
@@ -259,10 +245,7 @@ PRODUCT_COPY_FILES += \
 
 # IFAA Manager
 PRODUCT_PACKAGES += \
-    org.ifaa.android.manager
-
-PRODUCT_BOOT_JARS += \
-    org.ifaa.android.manager
+    IFAAService
 
 # IPACM
 PRODUCT_PACKAGES += \
@@ -295,10 +278,12 @@ PRODUCT_PACKAGES += \
     libstagefright_foundation \
     libstagefright_softomx.vendor
 
-# Net
+# Mlipay
 PRODUCT_PACKAGES += \
-    netutils-wrapper-1.0
+    vendor.xiaomi.hardware.mlipay@1.1.vendor \
+    vendor.xiaomi.hardware.mtdservice@1.0.vendor
 
+# Net
 PRODUCT_PACKAGES += \
     android.system.net.netd@1.1.vendor
 
@@ -324,8 +309,8 @@ PRODUCT_PACKAGES += \
    CarrierConfigOverlayVeux \
    DialerOverlayVeux \
    FrameworksResOverlayVeux \
-   SettingsProviderOverlayVeux \
    SettingsOverlayVeux \
+   SettingsProviderOverlayVeux \
    SystemUIOverlayVeux \
    TelephonyOverlayVeux \
    WifiOverlayVeux
@@ -397,7 +382,7 @@ vendor.qti.hardware.perf@2.2.vendor
 # Power
 PRODUCT_PACKAGES += \
     android.hardware.power-service-qti
-   
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/powerhint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.xml
 
@@ -446,11 +431,11 @@ PRODUCT_PACKAGES += \
     init.kernel.post_boot-holi.sh \
     init.qcom.sh \
     init.qcom.post_boot.sh \
-    init.nfc.rc \
     init.qcom.rc \
     init.qti.kernel.rc \
     init.qti.ufs.rc \
     init.target.rc \
+    init.xiaomi.rc \
     ueventd.qcom.rc \
     vendor_modprobe.sh
 
@@ -464,6 +449,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/etc/fstab.emmc:$(TARGET_COPY_OUT_VENDOR_RAMDISK)/first_stage_ramdisk/fstab.emmc \
     $(LOCAL_PATH)/rootdir/etc/init.recovery.qcom.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.recovery.qcom.rc
 
+# Remove unwanted packages
+PRODUCT_PACKAGES += \
+    RemovePackages
+
 # Sensors
 PRODUCT_PACKAGES += \
     android.hardware.sensors@2.1-service.xiaomi_holi-multihal \
@@ -476,7 +465,7 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.servicetracker@1.2.vendor
 
 # Shipping API Level
-PRODUCT_SHIPPING_API_LEVEL := 30    
+PRODUCT_SHIPPING_API_LEVEL := 30
 
 # Soong Namespaces
 PRODUCT_SOONG_NAMESPACES += \
@@ -538,14 +527,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(LOCAL_PATH)/wifi/,$(TARGET_COPY_OUT_VENDOR)/etc/wifi)
-
-# EXTRA: MiuiCamera
-ifneq ($(wildcard vendor/miuicamera/config.mk),)
-$(call inherit-product, vendor/miuicamera/config.mk)
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/miuicam/veux.xml:$(TARGET_COPY_OUT_VENDOR)/etc/device_features/veux.xml \
-    $(LOCAL_PATH)/configs/miuicam/peux.xml:$(TARGET_COPY_OUT_VENDOR)/etc/device_features/peux.xml
-endif
 
 # Inherit the proprietary files
 include vendor/xiaomi/veux/veux-vendor.mk
