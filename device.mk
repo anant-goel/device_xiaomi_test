@@ -57,9 +57,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     XiaomiParts
 
-# Call recording
-PRODUCT_PACKAGES += \
-    com.google.android.apps.dialer.call_recording_audio.features.xml
 
 PRODUCT_PACKAGES += \
     android.hardware.audio.effect@6.0-impl \
