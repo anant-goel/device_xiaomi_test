@@ -5,9 +5,9 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/evolution_veux.mk
+    $(LOCAL_DIR)/weedos_veux.mk
 
 COMMON_LUNCH_CHOICES := \
-    evolution_veux-user \
-    evolution_veux-userdebug \
-    evolution_veux-eng
+    weedos_veux-user \
+    weedos_veux-userdebug \
+    weedos_veux-eng
