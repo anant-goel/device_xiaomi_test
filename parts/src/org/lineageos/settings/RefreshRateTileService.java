@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 WaveOS
+ * Copyright (C) 2021 crDroid Android Project
  * Copyright (C) 2021 Chaldeaprjkt
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,8 +24,6 @@ import android.service.quicksettings.TileService;
 import android.view.Display;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
@@ -53,14 +51,11 @@ public class RefreshRateTileService extends TileService {
                 availableRates.add(rate);
             }
         }
-        if (!availableRates.isEmpty()) {
-            availableRates.sort(Comparator.naturalOrder());
-        }
         syncFromSettings();
     }
 
     private int getSettingOf(String key) {
-        float rate = Settings.System.getFloat(context.getContentResolver(), key, 60);
+        float rate = Settings.System.getFloat(context.getContentResolver(), key, 120);
         int active = availableRates.indexOf((int) Math.round(rate));
         return Math.max(active, 0);
     }
@@ -71,14 +66,15 @@ public class RefreshRateTileService extends TileService {
     }
 
     private void cycleRefreshRate() {
-        if (activeRateMin < availableRates.size() - 1) {
-            activeRateMin++;
-        } else {
-            activeRateMin = 0;
+        if(activeRateMax == 0){
+    	    if(activeRateMin == 0){
+                activeRateMin= availableRates.size();
+	    }
+	    activeRateMax = activeRateMin;
+	    float rate = availableRates.get(activeRateMin - 1);
+  	    Settings.System.putFloat(context.getContentResolver(), KEY_MIN_REFRESH_RATE, rate);
         }
-
-        float rate = availableRates.get(activeRateMin);
-        Settings.System.putFloat(context.getContentResolver(), KEY_MIN_REFRESH_RATE, rate);
+        float rate = availableRates.get(activeRateMax - 1);
         Settings.System.putFloat(context.getContentResolver(), KEY_PEAK_REFRESH_RATE, rate);
     }
 
